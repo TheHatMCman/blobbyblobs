@@ -150,7 +150,14 @@ function stageThree () {
     tiles.setTilemap(tilemap`level5`)
     tiles.placeOnTile(thePlayer, tiles.getTileLocation(4, 19))
 }
+function menuScreen () {
+	
+}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (gameStart0 == 0) {
+        gameInitial()
+        gameStart0 = 1
+    }
     if (jumpCounter == 0) {
         thePlayer.vy = -150
         pause(200)
@@ -2104,6 +2111,7 @@ let enemyStatusBar: StatusBarSprite = null
 let playerInvincibility = 0
 let thePlayer: Sprite = null
 let gameStart0 = 0
+gameStart0 = 0
 let titleLogo1 = sprites.create(img`
     ...........ffff.................
     ffff......fffffff...............
@@ -2271,65 +2279,70 @@ game.showLongText("Welcome to Blobby Battles", DialogLayout.Bottom)
 game.showLongText("Use \"Up\" + \"B\" to attack from below", DialogLayout.Bottom)
 game.showLongText("If you are heading in one direction, use the opposite direction + \"B\" to slide", DialogLayout.Bottom)
 game.showLongText("Good luck on defeating your inner darkness!", DialogLayout.Bottom)
-gameInitial()
 game.onUpdate(function () {
-    if (thePlayer.isHittingTile(CollisionDirection.Bottom)) {
-        jumpCounter = 0
-        wallJump = 0
+    if (gameStart0 == 1) {
+        if (thePlayer.isHittingTile(CollisionDirection.Bottom)) {
+            jumpCounter = 0
+            wallJump = 0
+        }
+        if (wallJump == 1) {
+            controller.moveSprite(thePlayer, 0, 0)
+            pause(200)
+            wallJump = 0
+        } else {
+            controller.moveSprite(thePlayer, 100, 0)
+        }
+        console.log(playerInvincibility)
     }
-    if (wallJump == 1) {
-        controller.moveSprite(thePlayer, 0, 0)
-        pause(200)
-        wallJump = 0
-    } else {
-        controller.moveSprite(thePlayer, 100, 0)
-    }
-    console.log(playerInvincibility)
 })
 forever(function () {
-    thePlayer.ay = 200
-    if (thePlayer.tileKindAt(TileDirection.Left, assets.tile`myTile29`) || thePlayer.tileKindAt(TileDirection.Left, assets.tile`myTile2`)) {
-        thePlayer.ay = 0
-        thePlayer.vy = 40
-        if (controller.A.isPressed()) {
-            thePlayer.vy = -200
-            thePlayer.vx = 100
-            wallJump = 1
+    if (gameStart0 == 1) {
+        thePlayer.ay = 200
+        if (thePlayer.tileKindAt(TileDirection.Left, assets.tile`myTile29`) || thePlayer.tileKindAt(TileDirection.Left, assets.tile`myTile2`)) {
+            thePlayer.ay = 0
+            thePlayer.vy = 40
+            if (controller.A.isPressed()) {
+                thePlayer.vy = -200
+                thePlayer.vx = 100
+                wallJump = 1
+            }
         }
-    }
-    if (thePlayer.tileKindAt(TileDirection.Right, assets.tile`myTile26`) || thePlayer.tileKindAt(TileDirection.Right, assets.tile`myTile3`)) {
-        thePlayer.ay = 0
-        thePlayer.vy = 40
-        if (controller.A.isPressed()) {
-            thePlayer.vy = -200
-            thePlayer.vx = -100
-            wallJump = 1
+        if (thePlayer.tileKindAt(TileDirection.Right, assets.tile`myTile26`) || thePlayer.tileKindAt(TileDirection.Right, assets.tile`myTile3`)) {
+            thePlayer.ay = 0
+            thePlayer.vy = 40
+            if (controller.A.isPressed()) {
+                thePlayer.vy = -200
+                thePlayer.vx = -100
+                wallJump = 1
+            }
         }
-    }
-    if (thePlayer.isHittingTile(CollisionDirection.Bottom)) {
-        wallJump = 0
-    }
-    if (true) {
-    	
+        if (thePlayer.isHittingTile(CollisionDirection.Bottom)) {
+            wallJump = 0
+        }
+        if (true) {
+        	
+        }
     }
 })
 game.onUpdateInterval(200, function () {
-    if (bossBattle == 1) {
-        timer.after(2000, function () {
-            bossOne.ay = 300
-            jumpEnemy = randint(0, 20)
-            leftEnemy = 0
-            rightEnemy = randint(0, 10)
-            bossOne.vx = randint(-100, 100)
-            if (jumpEnemy >= 19) {
-                bossOne.vy = -100
-            }
-        })
-    }
-    if (info.score() <= 0) {
-        info.setScore(0)
-        timer.after(100, function () {
-            playerStatusBar.value += -10
-        })
+    if (gameStart0 == 1) {
+        if (bossBattle == 1) {
+            timer.after(2000, function () {
+                bossOne.ay = 300
+                jumpEnemy = randint(0, 20)
+                leftEnemy = 0
+                rightEnemy = randint(0, 10)
+                bossOne.vx = randint(-100, 100)
+                if (jumpEnemy >= 19) {
+                    bossOne.vy = -100
+                }
+            })
+        }
+        if (info.score() <= 0) {
+            info.setScore(0)
+            timer.after(100, function () {
+                playerStatusBar.value += -10
+            })
+        }
     }
 })
