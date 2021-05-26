@@ -23,6 +23,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.bossEnemy, function (sprite, oth
         pause(500)
     }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile65`, function (sprite, location) {
+    game.showLongText("Hold \"UP\" to climb poles!", DialogLayout.Bottom)
+    tiles.setTileAt(tiles.getTileLocation(21, 16), assets.tile`transparency16`)
+})
 function stageThree () {
     stageCounter = 3
     scene.setBackgroundImage(img`
@@ -150,6 +154,12 @@ function stageThree () {
     tiles.setTilemap(tilemap`level5`)
     tiles.placeOnTile(thePlayer, tiles.getTileLocation(4, 19))
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile67`, function (sprite, location) {
+    game.showLongText("If you are heading in one direction, use the opposite direction + \"B\" to slide", DialogLayout.Bottom)
+    game.showLongText("Boxes such as the one you just collected give particles", DialogLayout.Bottom)
+    game.showLongText("You need at least 50 particles to slide", DialogLayout.Bottom)
+    tiles.setTileAt(tiles.getTileLocation(42, 12), assets.tile`transparency16`)
+})
 function menuScreen () {
 	
 }
@@ -1636,6 +1646,10 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile66`, function (sprite, location) {
+    game.showLongText("You can wall jump too!", DialogLayout.Bottom)
+    tiles.setTileAt(tiles.getTileLocation(33, 25), assets.tile`transparency16`)
+})
 function stageTwo () {
     stageCounter = 2
     tiles.placeOnTile(thePlayer, tiles.getTileLocation(14, 0))
@@ -1811,6 +1825,9 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile57`, function (sprite, 
     })
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile52`, function (sprite, location) {
+    game.showLongText("Use \"Up\" + \"B\" to attack enemies from below", DialogLayout.Bottom)
+    game.showLongText("You need at least 10 particles to attack", DialogLayout.Bottom)
+    game.showLongText("Good luck on defeating your inner darkness!", DialogLayout.Bottom)
     stageOne()
 })
 function arenaThree () {
@@ -1833,6 +1850,63 @@ function arenaThree () {
         . 1 1 1 f f f f f f 1 1 1 1 . . 
         . . . 1 1 1 1 1 1 1 . . . . . . 
         `, SpriteKind.bossEnemy)
+    animation.runImageAnimation(
+    bossThree,
+    [img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 1 1 1 1 . . . . . 
+        . . . . . . 1 1 f 1 1 1 . . . . 
+        . . . . . 1 1 f f f f 1 1 . . . 
+        . . . . 1 1 f f 1 1 f f 1 1 . . 
+        . . . 1 1 f f 1 1 1 1 f f 1 1 . 
+        . . . 1 f f 1 1 1 f 1 1 f f 1 . 
+        . . 1 1 f 1 1 1 1 1 1 1 1 f 1 1 
+        . . 1 f f 1 f 1 1 1 1 1 1 f f 1 
+        . 1 f f 1 1 1 1 1 1 f 1 1 1 f 1 
+        1 1 f 1 1 1 1 1 f f 1 f 1 f f 1 
+        1 f f 1 1 1 1 f 1 1 1 1 f f 1 1 
+        . 1 f f f 1 1 1 1 f f f f 1 1 . 
+        . 1 1 1 f f f f f f 1 1 1 1 . 1 
+        . 1 . 1 1 1 1 1 1 1 . . 1 . 1 . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . 1 1 1 1 1 . . . . . . 
+        . . . . 1 f f f f f 1 1 . . . . 
+        . . . 1 f 1 1 1 1 1 f f 1 1 . . 
+        . . 1 f 1 1 1 1 1 1 1 1 f 1 . . 
+        . 1 f 1 1 1 1 1 1 1 1 1 1 f 1 . 
+        . 1 f 1 1 1 1 1 1 f 1 1 1 1 f 1 
+        1 f 1 1 1 1 f 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 f f f f 1 1 1 f 1 
+        1 f 1 1 1 1 1 f 1 1 1 1 1 1 f 1 
+        . 1 f 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 1 1 f f f 1 1 1 1 1 1 f f 1 1 
+        . . . 1 1 1 f f f f f f 1 1 1 . 
+        1 . 1 . 1 . 1 1 1 1 1 1 . 1 . 1 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 1 1 1 . . . . . . . 
+        . . . . . 1 f f f 1 1 1 1 . . . 
+        . . . . 1 f 1 1 1 f f f f 1 . . 
+        . . . 1 f 1 1 1 1 1 1 1 1 f 1 . 
+        . . 1 f 1 1 1 1 1 1 1 1 1 1 f 1 
+        . . 1 f 1 1 1 1 1 f 1 1 1 1 f 1 
+        . 1 f 1 1 1 f 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 f f f f f 1 1 f 1 
+        1 f 1 1 1 1 f f 1 1 1 1 1 1 f 1 
+        1 f 1 1 1 1 1 1 1 1 1 1 1 1 f 1 
+        1 1 f f 1 1 1 1 1 1 1 1 f f f 1 
+        . . 1 1 f f f f f f f f 1 1 1 1 
+        1 . 1 . 1 1 1 1 1 1 1 1 . 1 . 1 
+        . 1 . 1 . 1 . 1 . 1 . . 1 . 1 . 
+        `],
+    100,
+    true
+    )
     enemyStatusBar = statusbars.create(40, 4, StatusBarKind.EnemyHealth)
     enemyStatusBar.value = 200
     enemyStatusBar.setColor(10, 2, 7)
@@ -1984,6 +2058,7 @@ controller.combos.attachCombo("l+b", function () {
     }
 })
 function gameInitial () {
+    game.showLongText("Welcome to Blobby Battles", DialogLayout.Bottom)
     info.setScore(1)
     thePlayer = sprites.create(img`
         . . . . . . . . . . . . . . . . 
@@ -2038,6 +2113,25 @@ statusbars.onStatusReached(StatusBarKind.EnemyHealth, statusbars.StatusCompariso
             enemyStatusBar.value += 1
         })
     }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile68`, function (sprite, location) {
+    info.changeScoreBy(100)
+    if (stageCounter == 0) {
+        tiles.setTileAt(tiles.getTileLocation(41, 12), assets.tile`transparency16`)
+    }
+    if (stageCounter == 1) {
+        tiles.setTileAt(tiles.getTileLocation(91, 28), assets.tile`transparency16`)
+    }
+    if (stageCounter == 2) {
+        tiles.setTileAt(tiles.getTileLocation(88, 5), assets.tile`transparency16`)
+    }
+    if (stageCounter == 3) {
+        tiles.setTileAt(tiles.getTileLocation(39, 15), assets.tile`transparency16`)
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile64`, function (sprite, location) {
+    game.showLongText("You'll have to jump over gaps like these with the \"A\" button!", DialogLayout.Bottom)
+    tiles.setTileAt(tiles.getTileLocation(11, 16), assets.tile`transparency16`)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile51`, function (sprite, location) {
     if (controller.up.isPressed()) {
@@ -2195,29 +2289,29 @@ scene.setBackgroundImage(img`
     cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
     cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
     cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    cccccccccccccccccccccbbccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
     cccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    cccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    cccccccccccccccccccccccbb555555bb555555bbccccccbb555555bb555555bbccccccbb55bbccccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    cccccccccccccccccccccccbb555555bb555555bbccccccbb555555bb555555bbccccccbb55bbccccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    cccccccccccccccccccccccbb555555bb555555bbccccccbb555555bb555555bbccccccbb55bbccccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    cccccccccccccccccccccccbb555555bb555555bbccccccbb555555bb555555bbccccccbb55bbccccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    cccccccccccccccccccccccbb555555bb555555bbccccccbb555555bb555555bbccccccbb55bbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    cccccccccccccccccccccccbb555555bb555555bbccccccbb555555bb555555bbccccccbb55bbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    cccccccccccccccccccccccbb555555bb555555bbccccccbb555555bb555555bbccccccbb55bb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    cccccccccccccccccccccccbb555555bb555555bbccccccbb555555bb555555bbccccccbb55bb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    cccccccccccccccccccccccbb555555bb555555bbccccccbb555555bb555555bbccccccbb55bb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    cccccccccccccccccccccccbb555555bb555555bbccccccbb555555bb555555bbccccccbb55bb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    cccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    cccccccccccccccccccccbbcc555555bb555555cccccccccc555555bb555555bbccccccbb55bbccccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    cccccccccccccccccccccccbbb555bb55bb555555ccccccc555555555555555bbccccccbb55bbccccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    cccccccccccccccccccccbbcc555555bb555555ccccccccc5555555b5555555bbccccccbb55bbccccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    cccccccccccccccccccccccbbb555bb55bb555555cccccc5c55555555555555bbccccccbb55bbccccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    cccccccccccccccccccccbbcc555555bb555555cccccccc55555555bb555555bbccccccbb55bbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    cccccccccccccccccccccccbbb555bb55bb555555ccccccc555555555555555bbccccccbb55bbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    cccccccccccccccccccccbbcc555555bb555555cccccccc55555555bb555555bbccccccbb55bb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    cccccccccccccccccccccccbbb555bb55bb555555cccccc5c55555555555555bbccccccbb55bb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    cccccccccccccccccccccbbcc555555bb555555cccccccc55555555bb555555bbccccccbb55bb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    cccccccccccccccccccccccbbb555bb55bb555555cccccccc55555555555555bbccccccbb55bb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    cccccccccccccccccccccbbccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
     cccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    cccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    cccccccccccccccccccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    cbbbbcbbbbbcbbbbbcbbbbcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
     bbbbbbbbbbbbbbbbbbbbbbbbb555555bb555555bb555555bbccccccbb555555bbccccccbb55bb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
     bbbbbbbbbbbbbbbbbbbbbbbbb555555bb555555bb555555bbccccccbb555555bbccccccbb55bb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    bccb55bccb55b55b55bccb5bb555555bb555555bb555555bbccccccbb555555bbccccccbb55bb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    bccb55bccb55b55b55bccb5bb555555bb555555bb555555bbccccccbb555555bbccccccbb55bb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    bccb55bccb55b55b55bccb5bb555555bb555555bb555555bbccccccbb555555bbccccccbb55bbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    bccb55bccb55b55b55bccb5bb555555bb555555bb555555bbccccccbb555555bbccccccbb55bbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
-    bccb55bccb55b55b55bccb5bb555555bb555555bb555555bbccccccbb555555bbccccccbb55bb55bccbccbccbccb55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    ccc5555ccc555555555cc555b555555bb555555bb555555bbccccccbb555555bbccccccbb55bb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    bccc55ccc555555555cccc5bb555555bb555555bb555555bbccccccbb555555bbccccccbb55bb55b55b55b55b55b55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    ccc5555ccc555555555cc555b555555bb555555bb555555bbccccccbb555555bbccccccbb55bbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    bccc55ccc555555555cccc5bb555555bb555555bb555555bbccccccbb555555bbccccccbb55bbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
+    ccc5555ccc555555555cc555b555555bb555555bb555555bbccccccbb555555bbccccccbb55bb55bccbccbccbccb55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
     bbbbbbbbbbbbbbbbbbbbbbbbb555555bb555555bb555555bbccccccbb555555bbccccccbb55bb55bccbccbccbccb55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
     bbbbbbbbbbbbbbbbbbbbbbbbb555555bb555555bb555555bbccccccbb555555bbccccccbb55bb55bccbccbccbccb55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
     bccb55bccb55bccb55bccb5bb555555bb555555bb555555bbccccccbb555555bbccccccbb55bb55bccbccbccbccb55b55bcccccccccccccccccccbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccc
@@ -2290,10 +2384,6 @@ scene.setBackgroundImage(img`
     b55bccbccb55bccb55bccb5bb555555bbccccccbbccccccbbccccccbb555555bbccccccbb55bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     bbbbbbbbbbbbbbbbbbbbbbbbb555555bbccccccbbccccccbbccccccbb555555bbccccccbb55bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccb55b55b55b55b55b55b
     `)
-game.showLongText("Welcome to Blobby Battles", DialogLayout.Bottom)
-game.showLongText("Use \"Up\" + \"B\" to attack from below", DialogLayout.Bottom)
-game.showLongText("If you are heading in one direction, use the opposite direction + \"B\" to slide", DialogLayout.Bottom)
-game.showLongText("Good luck on defeating your inner darkness!", DialogLayout.Bottom)
 game.onUpdate(function () {
     if (gameStart0 == 1) {
         if (thePlayer.isHittingTile(CollisionDirection.Bottom)) {
