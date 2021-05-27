@@ -2294,7 +2294,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile56`, function (sprite, 
 })
 function arenaOne () {
     tiles.setTilemap(tilemap`level1`)
-    bossOne = sprites.create(assets.image`Red Blob`, SpriteKind.bossEnemy)
+    bossOne = sprites.create(, SpriteKind.bossEnemy)
     enemyStatusBar = statusbars.create(40, 4, StatusBarKind.EnemyHealth)
     enemyStatusBar.value = 200
     enemyStatusBar.setColor(10, 2, 7)
